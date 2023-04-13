@@ -16,14 +16,15 @@ class _TasksListState extends State<TasksList> {
       builder: (context, taskvalue, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
+            final task = taskvalue.tasks[index];
             return TasksTile(
-                taskTitle: taskvalue.tasks[index].name,
-                isChecked: taskvalue.tasks[index].isDone,
+                taskTitle: task.name,
+                isChecked: task.isDone,
                 checkBoxCallBack: (checkBoxState) {
-                  // setState(() {
-                  //   Provider.of(context).tasks[index].toogleDone();
-                  // });
-                });
+                  taskvalue.updateTask(task);
+                }, onlongPress: () {
+                  taskvalue.deleteTask(task);
+            },);
           },
           itemCount: Provider.of<TaskData>(context).count,
         );

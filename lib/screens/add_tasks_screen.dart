@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo/models/task.dart';
+import 'package:todo/models/task_data.dart';
 import 'package:todo/widgets/tasks_list.dart';
 
 class Add_tasks extends StatelessWidget {
-
-  final Function addTaskCallBack;
-  const Add_tasks(this.addTaskCallBack);
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +41,10 @@ class Add_tasks extends StatelessWidget {
             ElevatedButton(
                 onPressed: () {
                   //task to be shown at the list
-                  addTaskCallBack(newTaskTitle);
+                  Provider.of<TaskData>(context,listen: false).addTask(newTaskTitle);
+                  Navigator.pop(context);
                 },
-                child: const Text('ADD'))
+                child: const Text('ADD'),),
           ],
         ),
       ),
